@@ -1,0 +1,1 @@
+Open index.html. This is WorthIt AI V3 visual MVP.

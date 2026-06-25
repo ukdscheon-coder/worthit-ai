@@ -1,0 +1,8 @@
+{
+  "name": "WorthIt AI",
+  "short_name": "WorthIt",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#070816",
+  "theme_color": "#ff2d75"
+}
