@@ -1,0 +1,12 @@
+{
+  "name": "worthit-ai",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo Static WorthIt AI build ready",
+    "start": "echo Static site served by Vercel"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
