@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "echo Static WorthIt AI build ready",
+    "build": "node build.js",
     "start": "echo Static site served by Vercel"
   },
   "engines": {
