@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "buildCommand": "echo Static site ready",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" }
+  ]
+}
