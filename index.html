@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>WorthIt Charge | Make charging time worth it</title>
-  <meta name="description" content="A mobile-first EV charging companion that turns waiting time into short social, local and AI-powered experiences.">
-  <meta name="theme-color" content="#101827">
+  <meta name="description" content="A mobile-first EV charging companion that turns waiting time into live games, local discoveries and Bestpick-style rewards.">
+  <meta name="theme-color" content="#08030f">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="WorthIt Charge">
@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=charge-1">
+  <link rel="stylesheet" href="style.css?v=charge-2">
 </head>
 <body>
   <main class="app">
@@ -25,30 +25,44 @@
       <button class="ghost" id="installButton" hidden>Install</button>
     </header>
 
-    <section class="hero card">
-      <p class="eyebrow">EV CHARGING MICRO-EXPERIENCES</p>
-      <h1>Make the wait feel worth it.</h1>
-      <p class="lead">Plug in, pick your charging time, and unlock short experiences that only make sense while your car is charging.</p>
-      <div class="charge-panel">
+    <section class="hero">
+      <div class="hero-orb" aria-hidden="true"></div>
+      <p class="eyebrow hot">LIVE NOW · EV WAITING GAME</p>
+      <h1>Your car is charging.<br><em>Your night just unlocked.</em></h1>
+      <p class="lead">Open one time-limited room, mission or reward that disappears when your charge ends.</p>
+      <div class="hero-stats">
+        <div><b id="onlineHero">128</b><span>drivers charging nearby</span></div>
+        <div><b>£4.80</b><span>Bestpick reward nearby</span></div>
+        <div><b>27m</b><span>average session</span></div>
+      </div>
+      <div class="charge-panel glass">
         <div>
-          <span class="small">Charging session</span>
+          <span class="small">Charging window</span>
           <strong id="timeLabel">30 min</strong>
         </div>
         <input id="minutes" type="range" min="10" max="60" step="5" value="30" aria-label="Charging minutes">
-        <button id="startSession">Start charging mode</button>
+        <button id="startSession">Unlock my charging room</button>
       </div>
     </section>
 
     <section class="session card" id="sessionCard">
       <div class="session-head">
         <div>
-          <p class="eyebrow">LIVE CHARGING MODE</p>
+          <p class="eyebrow">ONLY WHILE CHARGING</p>
           <h2 id="countdown">30:00</h2>
         </div>
         <div class="online"><span></span><b id="onlineCount">26</b> online nearby</div>
       </div>
       <div class="progress"><i id="progressBar"></i></div>
-      <p class="session-copy" id="sessionCopy">Choose a card below. The experience ends when charging ends.</p>
+      <p class="session-copy" id="sessionCopy">Pick a card. The room, the deal and the story expire when charging ends.</p>
+    </section>
+
+    <section class="bestpick card">
+      <div>
+        <p class="eyebrow">BESTPICK NEARBY</p>
+        <h2>Charge-time picks that can pay for the wait.</h2>
+      </div>
+      <div class="pick-rail" id="pickRail"></div>
     </section>
 
     <section class="experience-grid" id="experienceGrid" aria-label="Charging experiences"></section>
@@ -62,15 +76,15 @@
     </section>
 
     <section class="insights card">
-      <p class="eyebrow">WHY THIS BELONGS IN WORTHIT-AI</p>
-      <h2>WorthIt is not only about money. It is about whether a moment was worth spending.</h2>
+      <p class="eyebrow">WHY THIS CAN MAKE MONEY</p>
+      <h2>WorthIt Charge connects waiting time, nearby intent and Bestpick-style local rewards.</h2>
       <div class="metrics">
         <div><b id="points">0</b><span>WorthIt points</span></div>
-        <div><b>4</b><span>EV-native concepts</span></div>
-        <div><b>20-40</b><span>minute loops</span></div>
+        <div><b>3</b><span>revenue paths</span></div>
+        <div><b>20-40</b><span>minute buying window</span></div>
       </div>
     </section>
   </main>
-  <script src="app.js?v=charge-1"></script>
+  <script src="app.js?v=charge-2"></script>
 </body>
 </html>
