@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>WorthIt AI | Save money, save waiting time</title>
-  <meta name="description" content="WorthIt AI combines shopping saving checks, EV charging experiences and BestPick daily pick tournaments.">
+  <title>WorthIt Charge | EV charging time app</title>
+  <meta name="description" content="WorthIt Charge turns EV charging time into short rooms, AI missions and compact BestPick games.">
   <meta name="theme-color" content="#08030f">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="WorthIt AI">
+  <meta name="apple-mobile-web-app-title" content="WorthIt Charge">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -16,77 +16,62 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=worthit-hub-1">
+  <link rel="stylesheet" href="style.css?v=charge-focused-1">
 </head>
 <body>
   <main class="app">
     <header class="topbar">
-      <button class="brand" id="homeButton" aria-label="WorthIt AI home"><span>W</span><b>WorthIt</b> AI</button>
+      <button class="brand" id="homeButton" aria-label="WorthIt Charge home"><span>W</span><b>WorthIt</b> Charge</button>
       <button class="ghost" id="installButton" hidden>Install</button>
     </header>
 
-    <nav class="mode-switch" aria-label="WorthIt modes">
-      <button class="mode active" data-target="save">Save Money</button>
-      <button class="mode" data-target="charge">Charge Time</button>
+    <nav class="mode-switch two" aria-label="WorthIt Charge modes">
+      <button class="mode active" data-target="charge">Charge</button>
       <button class="mode" data-target="bestpick">BestPick</button>
     </nav>
 
-    <section class="hero card" id="save">
-      <div class="hero-orb" aria-hidden="true"></div>
-      <p class="eyebrow hot">SHOPPING REGRET CHECK</p>
-      <h1>Before you buy,<br><em>see what you could save.</em></h1>
-      <p class="lead">Paste a product, price or shopping idea. WorthIt gives a quick BUY, WAIT or DON'T BUY style estimate.</p>
-      <div class="save-box glass">
-        <input id="productInput" placeholder="Try: iPhone 16 Pro £999, Dyson V15, Temu smartwatch" autocomplete="off">
-        <button id="checkSaving">Check saving</button>
-      </div>
-      <div class="saving-result" id="savingResult">
-        <span class="saving-badge wait">WAIT</span>
-        <div><b>Potential saving: £42</b><p>WorthIt thinks you should compare alternatives before buying.</p></div>
-      </div>
-    </section>
-
     <section class="hero card" id="charge">
-      <p class="eyebrow hot">EV CHARGING MICRO-EXPERIENCE</p>
+      <div class="hero-orb" aria-hidden="true"></div>
+      <p class="eyebrow hot">ONLY WHILE CHARGING</p>
       <h1>Your car is charging.<br><em>Your wait just unlocked.</em></h1>
-      <p class="lead">Open one time-limited room, mission or story that disappears when your charge ends.</p>
+      <p class="lead">Pick a short room, mission, story or BestPick while your battery fills. Everything ends when charging ends.</p>
       <div class="hero-stats">
-        <div><b id="onlineHero">128</b><span>drivers charging nearby</span></div>
-        <div><b>30m</b><span>story and game loop</span></div>
-        <div><b>+25</b><span>WorthIt points</span></div>
+        <div><b id="onlineHero">128</b><span>drivers nearby</span></div>
+        <div><b>30m</b><span>session loop</span></div>
+        <div><b>+25</b><span>points</span></div>
       </div>
       <div class="charge-panel glass">
         <div><span class="small">Charging window</span><strong id="timeLabel">30 min</strong></div>
         <input id="minutes" type="range" min="10" max="60" step="5" value="30" aria-label="Charging minutes">
-        <button id="startSession">Unlock my charging room</button>
+        <button id="startSession">Start charging mode</button>
       </div>
     </section>
 
     <section class="session card" id="sessionCard">
       <div class="session-head">
-        <div><p class="eyebrow">ONLY WHILE CHARGING</p><h2 id="countdown">30:00</h2></div>
+        <div><p class="eyebrow">LIVE SESSION</p><h2 id="countdown">30:00</h2></div>
         <div class="online"><span></span><b id="onlineCount">26</b> online</div>
       </div>
       <div class="progress"><i id="progressBar"></i></div>
-      <p class="session-copy" id="sessionCopy">Pick a card. The room and the story expire when charging ends.</p>
+      <p class="session-copy" id="sessionCopy">Choose one quick experience below. The room and results close when charging ends.</p>
     </section>
+
+    <section class="experience-grid" id="experienceGrid" aria-label="Charging experiences"></section>
 
     <section class="bestpick card" id="bestpick">
       <p class="eyebrow">BESTPICK</p>
-      <h2>One question. Eight candidates. Seven picks. One champion.</h2>
-      <p class="section-copy">A Korean-style ideal-type pick game for food, sport, books, films and music. Choose A or B until your final winner survives.</p>
+      <h2>Quick pick while charging.</h2>
+      <p class="section-copy">Eight candidates. Seven taps. One winner. Food, films, music and more.</p>
       <div class="cup-status">
         <span id="cupRound">Quarterfinal 1 / 4</span>
         <b id="cupProgress">Pick 1 / 7</b>
       </div>
       <div class="cup-arena" id="cupArena"></div>
       <div class="cup-actions">
-        <button id="resetCup">Reset BestPick</button>
+        <button id="resetCup">Reset</button>
         <button id="nextCup">Next topic</button>
       </div>
     </section>
-
-    <section class="experience-grid" id="experienceGrid" aria-label="Charging experiences"></section>
 
     <section class="active card" id="activeExperience" hidden>
       <button class="close" id="closeExperience" aria-label="Close experience">Close</button>
@@ -96,16 +81,11 @@
       <div class="choice-row" id="choiceRow"></div>
     </section>
 
-    <section class="insights card">
-      <p class="eyebrow">PRODUCT STRUCTURE</p>
-      <h2>WorthIt AI now keeps three engines: save money, make waiting useful, and return daily for BestPick.</h2>
-      <div class="metrics">
-        <div><b id="points">0</b><span>WorthIt points</span></div>
-        <div><b>3</b><span>product modes</span></div>
-        <div><b>Daily</b><span>BestPick loop</span></div>
-      </div>
+    <section class="insights card compact-note">
+      <p class="eyebrow">NEXT APP IDEA</p>
+      <h2>Shopping Regret Check should live as a separate WorthIt Save app, not inside the charging app.</h2>
     </section>
   </main>
-  <script src="app.js?v=worthit-hub-2"></script>
+  <script src="app.js?v=charge-focused-1"></script>
 </body>
 </html>
