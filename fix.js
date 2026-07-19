@@ -1,21 +1,24 @@
 (()=>{
-  const scrollToTarget=id=>{
-    const el=document.getElementById(id);
-    if(!el)return;
-    const offset=126;
-    window.scrollTo({top:Math.max(0,el.getBoundingClientRect().top+window.scrollY-offset),behavior:'smooth'});
-  };
+  const $=id=>document.getElementById(id);
+  const base=['Coffee stop','Film genre','Road trip music','Sport','Food stop','Local discovery','EV car','Bike','Footballer','Actor','Model and icon','Fashion'];
+  const more=['Books','TV series','Games','Travel','Cities','Date idea','Family day','Pets','Interior','Home tech','Gadgets','AI tools','Study','Career','Side hustle','Wellness','Fitness','Outdoor','Luxury','Budget picks','Shopping','Skincare','Fragrance','Football clubs','Olympic sports','Classic cars','Motorbike brands','Creators','Influencer style','Art','Photography','Festivals','Night out','Podcasts','Comedy','Theatre','Musicals','Museums','Architecture','Hotels','Airlines','Airports','Train trips','Road trips','Camping gear','Hiking gear','Running shoes','Football boots','Tennis players','F1 drivers','Boxers','Golfers','Chefs','Restaurants','Pubs','Bakeries','Desserts','Breakfast','Brunch','Tea rooms','Workspaces','Desk chairs','Laptops','Tablets','Cameras','Drones','Headphones','Speakers','Watches','Bags','Sunglasses','Jewellery','Hair style','Make-up','Nails','Streetwear brands','Luxury brands','Sneakers','Outerwear','Perfume','Home fragrance','Gardening','House plants','Board games','Card games','Language learning','Universities','Productivity','Money habits','Insurance','Credit cards','Subscriptions','Streaming services','News apps','Weather apps','Maps apps','Parking apps','Charging networks','EV routes'];
+  const topicNames=[...base,...more];
+  const seeds=['Classic pick','Modern pick','Budget pick','Premium pick','Local favourite','Hidden gem','Beginner choice','Wildcard'];
+  let topicIndex=0,winners=[];
+  const clean=name=>name.replace(/ BestPick$/,'');
+  const topicFor=name=>({name:`${name} BestPick`,question:`Which ${name.toLowerCase()} option wins right now?`,candidates:seeds.map(seed=>[`${name} ${seed}`,`${seed} for a quick BestPick round.`])});
+  function stage(t){if(winners.length<4){const i=winners.length*2;return{label:`Quarterfinal ${winners.length+1}/4`,left:t.candidates[i],right:t.candidates[i+1]}}if(winners.length===4)return{label:'Semifinal 1/2',left:winners[0],right:winners[1]};if(winners.length===5)return{label:'Semifinal 2/2',left:winners[2],right:winners[3]};if(winners.length===6)return{label:'Final',left:winners[4],right:winners[5]};return null}
+  function renderGrid(){const best=$('bestpick');if(!best)return;let count=$('topicCount');if(!count){count=document.createElement('div');count.id='topicCount';count.className='topic-count';count.innerHTML=`<span><b>${topicNames.length}</b> topics available</span><button class="topic-toggle" type="button">Show all</button>`;best.insertBefore(count,best.querySelector('.cup-status'))}let grid=$('topicGrid');if(!grid){grid=document.createElement('div');grid.id='topicGrid';grid.className='topic-grid';best.insertBefore(grid,best.querySelector('.cup-status'))}const showAll=best.dataset.showAll==='true';const list=showAll?topicNames:topicNames.slice(0,24);grid.innerHTML=list.map((name,i)=>{const real=topicNames.indexOf(name);return`<button type="button" class="${real===topicIndex?'active':''}" data-topic="${real}">${clean(name)}</button>`}).join('');count.querySelector('button').textContent=showAll?'Show less':'Show all';}
+  function renderCup(){const t=topicFor(topicNames[topicIndex]);renderGrid();const cupRound=$('cupRound'),cupProgress=$('cupProgress'),cupArena=$('cupArena'),nextCup=$('nextCup');if(!cupArena)return;cupProgress.textContent=winners.length<7?`Pick ${winners.length+1}/7`:'Your BestPick';const m=stage(t);if(!m){const champ=winners[6];cupRound.textContent=t.name;nextCup.textContent='Next topic';cupArena.innerHTML=`<div class="champion"><p class="eyebrow">YOUR BESTPICK</p><b>${champ[0]}</b><p>${champ[1]}</p><p>${t.question}</p></div><aside class="rank-card"><p class="ad-label">BestPick rank</p><small>Live participant ranking will appear here once the database is connected.</small></aside><aside class="sponsor soft"><p class="ad-label">Sponsored suggestion</p><b>Inspired by ${champ[0]}</b><span>Turn this BestPick into a useful next step or relevant offer.</span><button type="button">Keep for later</button></aside>`;return}nextCup.textContent='Next topic';cupRound.textContent=`${t.name} · ${m.label}`;cupArena.innerHTML=`<button class="cup-card" data-pick="left"><small>A</small><b>${m.left[0]}</b><p>${m.left[1]}</p></button><div class="vs">VS</div><button class="cup-card" data-pick="right"><small>B</small><b>${m.right[0]}</b><p>${m.right[1]}</p></button>`;cupArena.querySelector('[data-pick="left"]').onclick=()=>{winners.push(m.left);renderCup()};cupArena.querySelector('[data-pick="right"]').onclick=()=>{winners.push(m.right);renderCup()}}
   document.addEventListener('click',event=>{
     const mode=event.target.closest('.mode[data-target]');
-    if(mode){
-      event.preventDefault();
-      document.querySelectorAll('.mode').forEach(btn=>btn.classList.toggle('active',btn===mode));
-      scrollToTarget(mode.dataset.target);
-      return;
-    }
-    const chip=event.target.closest('.topic-chip[data-topic]');
-    if(chip){
-      chip.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
-    }
+    if(mode){event.preventDefault();document.querySelectorAll('.mode').forEach(btn=>btn.classList.toggle('active',btn===mode));document.getElementById(mode.dataset.target)?.scrollIntoView({behavior:'smooth',block:'start'});return}
+    const toggle=event.target.closest('.topic-toggle');
+    if(toggle){const best=$('bestpick');best.dataset.showAll=best.dataset.showAll==='true'?'false':'true';renderGrid();return}
+    const topic=event.target.closest('#topicGrid [data-topic]');
+    if(topic){topicIndex=Number(topic.dataset.topic);winners=[];renderCup();return}
   },true);
+  $('resetCup')?.addEventListener('click',()=>{winners=[];renderCup()},true);
+  $('nextCup')?.addEventListener('click',()=>{topicIndex=(topicIndex+1)%topicNames.length;winners=[];renderCup()},true);
+  setTimeout(renderCup,50);
 })();
