@@ -1,8 +1,15 @@
 {
-  "name": "WorthIt AI",
+  "name": "WorthIt Charge",
   "short_name": "WorthIt",
-  "start_url": "./",
+  "description": "Turn EV charging time into short social, local and AI-powered experiences.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#070816",
-  "theme_color": "#ff2d75"
+  "background_color": "#07111f",
+  "theme_color": "#101827",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "categories": ["lifestyle", "travel", "entertainment"]
 }
