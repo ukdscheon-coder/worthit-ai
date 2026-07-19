@@ -1,5 +1,5 @@
-const CACHE='worthit-charge-focused-v9';
-const ASSETS=['/','/index.html','/style.css?v=charge-focused-8','/fix.css?v=charge-focused-9','/app.js?v=charge-focused-8','/fix.js?v=charge-focused-9','/manifest.json','/icon.svg'];
+const CACHE='worthit-charge-focused-v10';
+const ASSETS=['/','/index.html','/style.css?v=charge-focused-8','/fix.css?v=charge-focused-10','/app.js?v=charge-focused-8','/fix.js?v=charge-focused-10','/manifest.json','/icon.svg'];
 
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()))
